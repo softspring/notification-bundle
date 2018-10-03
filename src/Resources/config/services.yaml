@@ -11,3 +11,12 @@ services:
     sfs_notifier:
         alias: Softspring\NotificationBundle\Notifier\Notifier
         public: true
+
+    Softspring\NotificationBundle\Twig\NotificationsExtension:
+        arguments:
+            $tokenStorage: '@security.token_storage'
+            $em: '@doctrine.orm.entity_manager'
+            $translator: '@translator'
+            $notificationClass: '%sfs_notification.model.notification.class%'
+        tags:
+            - { name: twig.extension }
