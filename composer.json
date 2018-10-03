@@ -1,0 +1,14 @@
+{
+    "name": "softspring/notification-bundle",
+    "description": "User notifications bundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "require": {
+        "softspring/user-bundle": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Softspring\\NotificationBundle\\": "src/"
+        }
+    }
+}
