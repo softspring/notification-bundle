@@ -20,3 +20,7 @@ services:
             $notificationClass: '%sfs_notification.model.notification.class%'
         tags:
             - { name: twig.extension }
+
+    sfs_notification.notification.controller:
+        class: Softspring\NotificationBundle\Controller\NotificationController
+        public: true

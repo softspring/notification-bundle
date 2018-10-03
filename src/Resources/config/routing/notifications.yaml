@@ -1,0 +1,5 @@
+sfs_notification_view_all:
+    defaults:
+        _controller: sfs_notification.notification.controller::viewAll
+    path: /all
+

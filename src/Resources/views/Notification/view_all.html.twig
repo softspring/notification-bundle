@@ -1,0 +1,15 @@
+{% extends '@SfsNotification/layout.html.twig' %}
+
+{% block notificationsContent %}
+    <ul class="pl-3 pr-3">
+        {% for notification in notifications %}
+            <li class="border-bottom">
+                <p class="text-truncate mb-0">{{ notificationMessage(notification) }}</p>
+                <p class="text-size-0 font-weight-lighter mb-0"
+                   title="{{ notification.createdAt|date('H:i:s d-m-Y') }}">
+                    {{ notification.createdAt|ago }}
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock notificationsContent %}
