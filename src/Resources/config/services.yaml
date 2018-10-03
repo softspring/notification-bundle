@@ -1,0 +1,13 @@
+services:
+    sfs_notification.object_manager:
+        class: Doctrine\Common\Persistence\ObjectManager
+        arguments: ["sfs_notification.model_manager_name"]
+
+    Softspring\NotificationBundle\Notifier\Notifier:
+        arguments:
+            $notificationClass: '%sfs_notification.model.notification.class%'
+            $em: '@doctrine.orm.entity_manager'
+
+    sfs_notifier:
+        alias: Softspring\NotificationBundle\Notifier\Notifier
+        public: true

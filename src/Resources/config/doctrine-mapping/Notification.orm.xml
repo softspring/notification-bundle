@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <mapped-superclass name="Softspring\NotificationBundle\Model\Notification">
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="prePersist" method="autoSetCreatedAt" />
+        </lifecycle-callbacks>
+
+        <field name="createdAt" column="created_at" type="datetime" nullable="true" />
+
+        <field name="read" column="is_read" type="boolean" nullable="false" />
+
+        <field name="readAt" column="read_at" type="datetime" nullable="true" />
+
+        <field name="messageCode" column="message_code" type="smallint" nullable="false">
+            <options>
+                <option name="unsigned">true</option>
+                <option name="default">0</option>
+            </options>
+        </field>
+
+        <field name="messageLevel" column="message_level" type="smallint" nullable="false">
+            <options>
+                <option name="unsigned">true</option>
+                <option name="default">0</option>
+            </options>
+        </field>
+
+        <field name="message" column="message" type="array" nullable="false" />
+
+    </mapped-superclass>
+
+</doctrine-mapping>
