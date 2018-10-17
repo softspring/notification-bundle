@@ -18,6 +18,7 @@ services:
             $em: '@doctrine.orm.entity_manager'
             $translator: '@translator'
             $notificationClass: '%sfs_notification.model.notification.class%'
+            $router: '@router'
         tags:
             - { name: twig.extension }
 

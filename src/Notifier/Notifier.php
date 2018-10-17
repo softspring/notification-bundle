@@ -4,7 +4,7 @@ namespace Softspring\NotificationBundle\Notifier;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Softspring\NotificationBundle\Model\NotificationInterface;
-use Softspring\UserBundle\Model\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class Notifier
 {

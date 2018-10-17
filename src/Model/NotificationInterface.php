@@ -2,7 +2,7 @@
 
 namespace Softspring\NotificationBundle\Model;
 
-use Softspring\UserBundle\Model\UserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 interface NotificationInterface
 {
@@ -32,7 +32,22 @@ interface NotificationInterface
     /**
      * @return bool
      */
+    public function isNew(): bool;
+
+    /**
+     * @param bool $new
+     */
+    public function setNew(bool $new): void;
+
+    /**
+     * @return bool
+     */
     public function isRead(): bool;
+
+    /**
+     * @return bool
+     */
+    public function isUnread(): bool;
 
     /**
      * @param bool

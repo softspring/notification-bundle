@@ -12,6 +12,8 @@
 
         <field name="createdAt" column="created_at" type="datetime" nullable="true" />
 
+        <field name="new" column="is_new" type="boolean" nullable="false" />
+
         <field name="read" column="is_read" type="boolean" nullable="false" />
 
         <field name="readAt" column="read_at" type="datetime" nullable="true" />

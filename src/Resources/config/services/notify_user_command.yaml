@@ -1,0 +1,5 @@
+services:
+    sfs_notification.command.nofity:
+        class: Softspring\NotificationBundle\Command\NotifyUserCommand
+        tags:
+            - { name: console.command, command: sfs:notification:notify }

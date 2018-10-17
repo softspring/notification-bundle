@@ -17,6 +17,8 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('notification_class')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('user_class')->isRequired()->cannotBeEmpty()->end()
+                ->booleanNode('notify_user_command')->defaultFalse()->end()
                 ->scalarNode('db_driver')
                     ->validate()
                     ->ifNotInArray($supportedDrivers)
@@ -28,6 +30,21 @@ class Configuration implements ConfigurationInterface
                 ->end()
             ->end()
         ;
+
+
+//    notifications:
+//        notif1:
+//            event: "issue.create"
+//            filter_expression: "isGranted(...)"
+//            message:
+//                raw: "raw message"
+//                translation_id: "message.id"
+//                translation_domain: "notifications"
+//                data: []
+//            code: 500
+//            screen: true
+//            email: false
+//            push: true
 
         return $treeBuilder;
     }

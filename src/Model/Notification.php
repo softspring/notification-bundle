@@ -2,12 +2,24 @@
 
 namespace Softspring\NotificationBundle\Model;
 
+use Symfony\Component\Security\Core\User\UserInterface;
+
 abstract class Notification implements NotificationInterface
 {
+    /**
+     * @var UserInterface|null
+     */
+    protected $user;
+
     /**
      * @var \DateTime|null
      */
     protected $createdAt;
+
+    /**
+     * @var boolean
+     */
+    protected $new = true;
 
     /**
      * @var boolean
@@ -40,6 +52,22 @@ abstract class Notification implements NotificationInterface
     protected $message;
 
     /**
+     * @return null|UserInterface
+     */
+    public function getUser(): ?UserInterface
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param null|UserInterface $user
+     */
+    public function setUser(?UserInterface $user): void
+    {
+        $this->user = $user;
+    }
+
+    /**
      * @inheritdoc
      */
     public function getCreatedAt(): ?\DateTime
@@ -56,6 +84,22 @@ abstract class Notification implements NotificationInterface
     }
 
     /**
+     * @return bool
+     */
+    public function isNew(): bool
+    {
+        return $this->new;
+    }
+
+    /**
+     * @param bool $new
+     */
+    public function setNew(bool $new): void
+    {
+        $this->new = $new;
+    }
+
+    /**
      * @inheritdoc
      */
     public function isRead(): bool
@@ -66,9 +110,21 @@ abstract class Notification implements NotificationInterface
     /**
      * @inheritdoc
      */
+    public function isUnread(): bool
+    {
+        return !$this->isRead();
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function setRead(bool $read): void
     {
         $this->read = $read;
+
+        if (!$this->getReadAt()) {
+            $this->setReadAt(new \DateTime('now'));
+        }
     }
 
     /**
@@ -85,6 +141,10 @@ abstract class Notification implements NotificationInterface
     public function setReadAt(\DateTime $readAt): void
     {
         $this->readAt = $readAt;
+
+        if (!$this->isRead()) {
+            $this->setRead(true);
+        }
     }
 
     /**

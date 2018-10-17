@@ -21,6 +21,7 @@ class SfsNotificationExtension extends Extension
         $config = $processor->processConfiguration($configuration, $configs);
 
         $container->setParameter('sfs_notification.model.notification.class', $config['notification_class']);
+        $container->setParameter('sfs_notification.model.user.class', $config['user_class']);
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
@@ -30,5 +31,8 @@ class SfsNotificationExtension extends Extension
             $container->setParameter($this->getAlias().'.backend_type_'.$config['db_driver'], true);
         }
 
+        if (true === $config['notify_user_command']) {
+            $loader->load('services/notify_user_command.yaml');
+        }
     }
 }
