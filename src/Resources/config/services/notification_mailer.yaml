@@ -1,0 +1,10 @@
+services:
+    Softspring\NotificationBundle\Mailer\NotificationMailer:
+        arguments:
+            $mailer: null
+            $twig: '@twig'
+            $fromEmail: '%sfs_notification.mailer.from_email%'
+
+    sfs_notification_mailer:
+        alias: Softspring\NotificationBundle\Mailer\NotificationMailer
+        public: true

@@ -28,6 +28,13 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeEmpty()
                     ->defaultValue('orm')
                 ->end()
+                ->arrayNode('mailer')
+                    ->children()
+                        ->scalarNode('service')->end()
+                        ->scalarNode('from_name')->end()
+                        ->scalarNode('from_email')->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

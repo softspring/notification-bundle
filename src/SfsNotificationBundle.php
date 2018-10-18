@@ -3,6 +3,7 @@
 namespace Softspring\NotificationBundle;
 
 use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use Softspring\NotificationBundle\DependencyInjection\CompilerPass\NotificationMailerCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -16,6 +17,8 @@ class SfsNotificationBundle extends Bundle
         parent::build($container);
 
         $this->addRegisterMappingsPass($container);
+
+        $container->addCompilerPass(new NotificationMailerCompilerPass());
     }
 
     /**
