@@ -138,7 +138,7 @@ abstract class Notification implements NotificationInterface
     /**
      * @inheritdoc
      */
-    public function setReadAt(\DateTime $readAt): void
+    public function setReadAt(?\DateTime $readAt): void
     {
         $this->readAt = $readAt;
 
@@ -193,5 +193,17 @@ abstract class Notification implements NotificationInterface
     public function setMessage(array $message): void
     {
         $this->message = $message;
+    }
+
+    public function markRead(): void
+    {
+        $this->read = true;
+        $this->readAt = new \DateTime('now');
+    }
+
+    public function markUnread(): void
+    {
+        $this->read = false;
+        $this->readAt = null;
     }
 }

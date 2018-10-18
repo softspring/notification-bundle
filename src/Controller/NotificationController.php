@@ -8,16 +8,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class NotificationController extends Controller
 {
-    public function viewAll(): Response
+    public function viewAll(Request $request): Response
     {
         $notifications = $this->getRepository()->findBy([
             'user' => $this->getUser(),
         ], ['createdAt' => 'desc']);
 
-        $this->markAllAsReadAjax();
+        $this->markAllAsNotNewAjax($request);
 
         return $this->render('@SfsNotification/Notification/view_all.html.twig', [
             'notifications' => $notifications,
@@ -26,42 +27,31 @@ class NotificationController extends Controller
 
     public function markAsRead(string $notification, Request $request): RedirectResponse
     {
-        $notification = $this->getRepository()->findOneById($notification);
+        $notification = $this->getNotification($notification);
 
-        if ($notification->getUser() != $this->getUser()) {
-            throw $this->createAccessDeniedException('Notification is not owned by user');
-        }
-
-        $notification->setReadAt(new \DateTime('now'));
-        $notification->setRead(true);
+        $notification->markRead();
 
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirect($request->query->get('continue', '/'));
     }
 
-    public function markAsReadAjax(NotificationInterface $notification): Response
+    public function markAsReadAjax(string $notification): Response
     {
-        if ($notification->getUser() != $this->getUser()) {
-            throw $this->createAccessDeniedException('Notification is not owned by user');
-        }
+        $notification = $this->getNotification($notification);
 
-        $notification->setReadAt(new \DateTime('now'));
-        $notification->setRead(true);
+        $notification->markRead();
 
         $this->getDoctrine()->getManager()->flush();
 
         return new Response('', Response::HTTP_NO_CONTENT);
     }
 
-    public function markAsUnreadAjax(NotificationInterface $notification): Response
+    public function markAsUnreadAjax(string $notification): Response
     {
-        if ($notification->getUser() != $this->getUser()) {
-            throw $this->createAccessDeniedException('Notification is not owned by user');
-        }
+        $notification = $this->getNotification($notification);
 
-        $notification->setReadAt(null);
-        $notification->setRead(false);
+        $notification->markUnread();
 
         $this->getDoctrine()->getManager()->flush();
 
@@ -108,5 +98,23 @@ class NotificationController extends Controller
     protected function getRepository(): EntityRepository
     {
         return $this->getDoctrine()->getRepository($this->getParameter('sfs_notification.model.notification.class'));
+    }
+
+    /**
+     * @param string $notificationId
+     *
+     * @return NotificationInterface
+     * @throws \Doctrine\ORM\ORMException
+     * @throws AccessDeniedException
+     */
+    protected function getNotification(string $notificationId): NotificationInterface
+    {
+        $notification = $this->getRepository()->findOneById($notificationId);
+
+        if ($notification->getUser() != $this->getUser()) {
+            throw $this->createAccessDeniedException('Notification is not owned by user');
+        }
+
+        return $notification;
     }
 }

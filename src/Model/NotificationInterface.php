@@ -62,7 +62,7 @@ interface NotificationInterface
     /**
      * @param \DateTime|null $readAt
      */
-    public function setReadAt(\DateTime $readAt): void;
+    public function setReadAt(?\DateTime $readAt): void;
 
     /**
      * @return int|null
@@ -93,4 +93,14 @@ interface NotificationInterface
      * @param array $message
      */
     public function setMessage(array $message): void;
+
+    /**
+     * Set read notification
+     */
+    public function markRead(): void;
+
+    /**
+     * Set unread notification
+     */
+    public function markUnread(): void;
 }
