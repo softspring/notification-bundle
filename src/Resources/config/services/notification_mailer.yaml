@@ -4,6 +4,7 @@ services:
             $mailer: null
             $twig: '@twig'
             $fromEmail: '%sfs_notification.mailer.from_email%'
+            $fromName: '%sfs_notification.mailer.from_name%'
 
     sfs_notification_mailer:
         alias: Softspring\NotificationBundle\Mailer\NotificationMailer
