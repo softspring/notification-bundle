@@ -12,7 +12,7 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sfs_notification');
 
-        $supportedDrivers = array('orm', 'custom');
+        $supportedDrivers = ['orm', 'custom'];
 
         $rootNode
             ->children()
@@ -38,7 +38,6 @@ class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-
 //    notifications:
 //        notif1:
 //            event: "issue.create"
@@ -55,5 +54,4 @@ class Configuration implements ConfigurationInterface
 
         return $treeBuilder;
     }
-
 }

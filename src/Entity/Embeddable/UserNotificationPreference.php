@@ -27,49 +27,31 @@ class UserNotificationPreference
      */
     protected $push = true;
 
-    /**
-     * @return bool
-     */
     public function isScreen(): bool
     {
         return $this->screen;
     }
 
-    /**
-     * @param bool $screen
-     */
     public function setScreen(bool $screen): void
     {
         $this->screen = $screen;
     }
 
-    /**
-     * @return bool
-     */
     public function isEmail(): bool
     {
         return $this->email;
     }
 
-    /**
-     * @param bool $email
-     */
     public function setEmail(bool $email): void
     {
         $this->email = $email;
     }
 
-    /**
-     * @return bool
-     */
     public function isPush(): bool
     {
         return $this->push;
     }
 
-    /**
-     * @param bool $push
-     */
     public function setPush(bool $push): void
     {
         $this->push = $push;

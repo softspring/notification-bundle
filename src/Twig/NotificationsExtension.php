@@ -43,12 +43,6 @@ class NotificationsExtension extends AbstractExtension
 
     /**
      * NotificationsExtension constructor.
-     *
-     * @param TokenStorageInterface  $tokenStorage
-     * @param EntityManagerInterface $em
-     * @param TranslatorInterface    $translator
-     * @param string                 $notificationClass
-     * @param RouterInterface        $router
      */
     public function __construct(TokenStorageInterface $tokenStorage, EntityManagerInterface $em, TranslatorInterface $translator, string $notificationClass, RouterInterface $router)
     {
@@ -67,22 +61,17 @@ class NotificationsExtension extends AbstractExtension
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getFunctions()
     {
         return [
             new TwigFunction('getUserNotifications', [$this, 'getUserNotifications']),
-            new TwigFunction('notificationMessage', [$this, 'notificationMessage'], ['is_safe'=>['html']]),
+            new TwigFunction('notificationMessage', [$this, 'notificationMessage'], ['is_safe' => ['html']]),
             new TwigFunction('notificationMarkAsRead', [$this, 'notificationMarkAsRead']),
         ];
     }
 
-    /**
-     * @param int|null $limit
-     *
-     * @return Collection
-     */
     public function getUserNotifications(?int $limit = 4, bool $onlyUnread = false): Collection
     {
         if (!$token = $this->tokenStorage->getToken()) {
@@ -131,8 +120,6 @@ class NotificationsExtension extends AbstractExtension
 
     /**
      * @param array|Collection $collection
-     *
-     * @return bool
      */
     public function unreadNotifications($collection): bool
     {
@@ -144,7 +131,7 @@ class NotificationsExtension extends AbstractExtension
             $unreadNotifications = array_filter($collection, $filterCallback);
 
             return !empty($unreadNotifications);
-        } else if ($collection instanceof Collection) {
+        } elseif ($collection instanceof Collection) {
             $unreadNotifications = $collection->filter($filterCallback);
 
             return (bool) $unreadNotifications->count();

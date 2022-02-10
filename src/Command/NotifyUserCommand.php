@@ -41,7 +41,7 @@ EOT
 
         if ($email = $input->getOption('email')) {
             $user = $repo->findOneBy(['email' => $email]);
-        } else if ($username = $input->getOption('username')) {
+        } elseif ($username = $input->getOption('username')) {
             $user = $repo->findOneBy(['username' => $username]);
         } else {
             throw new InvalidOptionException('Email or username options is required');
@@ -55,7 +55,7 @@ EOT
 
         $message = $input->getArgument('message');
 
-        /** @var UserInterface $user */
+        /* @var UserInterface $user */
         $notifier->notifyUser($user, ['raw' => $message]);
     }
 }

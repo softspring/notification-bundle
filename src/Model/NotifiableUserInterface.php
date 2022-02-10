@@ -11,14 +11,8 @@ interface NotifiableUserInterface
      */
     public function getNotifications(): Collection;
 
-    /**
-     * @return bool
-     */
     public function hasUnreadNotifications(): bool;
 
-    /**
-     * @return bool
-     */
     public function hasNewNotifications(): bool;
 
     /**

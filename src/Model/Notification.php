@@ -17,12 +17,12 @@ abstract class Notification implements NotificationInterface
     protected $createdAt;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $new = true;
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $read = false;
 
@@ -32,12 +32,12 @@ abstract class Notification implements NotificationInterface
     protected $readAt;
 
     /**
-     * @var integer|null
+     * @var int|null
      */
     protected $messageCode = self::CODE_UNDEFINED;
 
     /**
-     * @var integer|null
+     * @var int|null
      */
     protected $messageLevel = self::LEVEL_NOTICE;
 
@@ -51,24 +51,18 @@ abstract class Notification implements NotificationInterface
      */
     protected $message;
 
-    /**
-     * @return null|UserInterface
-     */
     public function getUser(): ?UserInterface
     {
         return $this->user;
     }
 
-    /**
-     * @param null|UserInterface $user
-     */
     public function setUser(?UserInterface $user): void
     {
         $this->user = $user;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getCreatedAt(): ?\DateTime
     {
@@ -76,31 +70,25 @@ abstract class Notification implements NotificationInterface
     }
 
     /**
-     * Auto set created at
+     * Auto set created at.
      */
     public function autoSetCreatedAt()
     {
         $this->createdAt = new \DateTime('now');
     }
 
-    /**
-     * @return bool
-     */
     public function isNew(): bool
     {
         return $this->new;
     }
 
-    /**
-     * @param bool $new
-     */
     public function setNew(bool $new): void
     {
         $this->new = $new;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isRead(): bool
     {
@@ -108,7 +96,7 @@ abstract class Notification implements NotificationInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isUnread(): bool
     {
@@ -116,7 +104,7 @@ abstract class Notification implements NotificationInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setRead(bool $read): void
     {
@@ -128,7 +116,7 @@ abstract class Notification implements NotificationInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getReadAt(): ?\DateTime
     {
@@ -136,7 +124,7 @@ abstract class Notification implements NotificationInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setReadAt(?\DateTime $readAt): void
     {
@@ -148,7 +136,7 @@ abstract class Notification implements NotificationInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getMessageCode(): ?int
     {
@@ -156,7 +144,7 @@ abstract class Notification implements NotificationInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setMessageCode(int $messageCode): void
     {
@@ -164,7 +152,7 @@ abstract class Notification implements NotificationInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getMessageLevel(): ?int
     {
@@ -172,7 +160,7 @@ abstract class Notification implements NotificationInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setMessageLevel(int $messageLevel): void
     {
@@ -180,7 +168,7 @@ abstract class Notification implements NotificationInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getMessage(): ?array
     {
@@ -188,7 +176,7 @@ abstract class Notification implements NotificationInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function setMessage(array $message): void
     {

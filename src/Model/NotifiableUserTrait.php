@@ -15,9 +15,6 @@ trait NotifiableUserTrait
         return $this->notifications;
     }
 
-    /**
-     * @return bool
-     */
     public function hasUnreadNotifications(): bool
     {
         return (bool) $this->getNotifications()->filter(function (NotificationInterface $notification) {
@@ -25,9 +22,6 @@ trait NotifiableUserTrait
         })->count();
     }
 
-    /**
-     * @return bool
-     */
     public function hasNewNotifications(): bool
     {
         return (bool) $this->getNotifications()->filter(function (NotificationInterface $notification) {

@@ -28,11 +28,6 @@ class NotificationMailer implements NotificationMailerInterface
 
     /**
      * NotificationMailer constructor.
-     *
-     * @param \Swift_Mailer     $mailer
-     * @param \Twig_Environment $twig
-     * @param string            $fromEmail
-     * @param string|null       $fromName
      */
     public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig, string $fromEmail, string $fromName = null)
     {
@@ -43,11 +38,6 @@ class NotificationMailer implements NotificationMailerInterface
     }
 
     /**
-     * @param string        $templateName
-     * @param UserInterface $user
-     * @param array         $context
-     * @param string|null   $locale
-     *
      * @throws \Throwable
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime

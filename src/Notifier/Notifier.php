@@ -20,9 +20,6 @@ class Notifier
 
     /**
      * Notifier constructor.
-     *
-     * @param string                 $notificationClass
-     * @param EntityManagerInterface $em
      */
     public function __construct(string $notificationClass, EntityManagerInterface $em)
     {
@@ -31,12 +28,7 @@ class Notifier
     }
 
     /**
-     * @param UserInterface  $user
-     * @param array $message
-     * @param int   $messageLevel
-     * @param int   $messageCode
-     *
-     * @return NotificationInterface
+     * @param int $messageLevel
      */
     public function createNotification(UserInterface $user, array $message, $messageLevel = NotificationInterface::LEVEL_NOTICE, int $messageCode = NotificationInterface::CODE_UNDEFINED): NotificationInterface
     {
@@ -54,7 +46,6 @@ class Notifier
 
         return $notification;
     }
-
 
     public function notifyUser(UserInterface $user, array $message, $messageLevel = NotificationInterface::LEVEL_NOTICE, int $messageCode = NotificationInterface::CODE_UNDEFINED): void
     {

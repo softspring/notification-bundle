@@ -14,9 +14,6 @@ class SfsNotificationBundle extends Bundle
         return \dirname(__DIR__);
     }
 
-    /**
-     * @param ContainerBuilder $container
-     */
     public function build(ContainerBuilder $container)
     {
         parent::build($container);
@@ -26,17 +23,14 @@ class SfsNotificationBundle extends Bundle
         $container->addCompilerPass(new NotificationMailerCompilerPass());
     }
 
-    /**
-     * @param ContainerBuilder $container
-     */
     private function addRegisterMappingsPass(ContainerBuilder $container)
     {
-        $mappings = array(
+        $mappings = [
             realpath(__DIR__.'/../config/doctrine-mapping') => 'Softspring\NotificationBundle\Model',
-        );
+        ];
 
         if (class_exists('Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass')) {
-            $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, array('sfs_notification.model_manager_name'), 'sfs_notification.backend_type_orm'));
+            $container->addCompilerPass(DoctrineOrmMappingsPass::createXmlMappingDriver($mappings, ['sfs_notification.model_manager_name'], 'sfs_notification.backend_type_orm'));
         }
     }
 }

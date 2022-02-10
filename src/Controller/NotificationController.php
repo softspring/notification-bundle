@@ -109,9 +109,6 @@ class NotificationController extends AbstractController
     }
 
     /**
-     * @param string $notificationId
-     *
-     * @return NotificationInterface
      * @throws \Doctrine\ORM\ORMException
      * @throws AccessDeniedException
      */
