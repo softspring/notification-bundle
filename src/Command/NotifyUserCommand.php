@@ -2,16 +2,20 @@
 
 namespace Softspring\NotificationBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class NotifyUserCommand extends ContainerAwareCommand
+class NotifyUserCommand extends Command implements ContainerAwareInterface
 {
+    use ContainerAwareTrait;
+
     protected function configure()
     {
         $this
@@ -30,8 +34,8 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $userClassName = $this->getContainer()->getParameter('sfs_notification.model.user.class');
-        $em = $this->getContainer()->get('doctrine')->getManager();
+        $userClassName = $this->container->getParameter('sfs_notification.model.user.class');
+        $em = $this->container->get('doctrine')->getManager();
 
         $repo = $em->getRepository($userClassName);
 
@@ -47,7 +51,7 @@ EOT
             throw new InvalidOptionException('User not found');
         }
 
-        $notifier = $this->getContainer()->get('sfs_notifier');
+        $notifier = $this->container->get('sfs_notifier');
 
         $message = $input->getArgument('message');
 

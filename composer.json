@@ -3,12 +3,29 @@
     "description": "User notifications bundle",
     "type": "symfony-bundle",
     "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
-        "softspring/user-bundle": "*"
+        "php": ">=7.4",
+        "softspring/user-bundle": "^4.0"
+    },
+    "require-dev": {
+        "doctrine/orm": "^2.7",
+        "symfony/console": "^5.4 || ^6.0",
+        "symfony/framework-bundle": "^5.4 || ^6.0",
+        "symfony/security-bundle": "^5.4 || ^6.0",
+        "friendsofphp/php-cs-fixer": "9999999-dev",
+        "symfony/form": "^5.4",
+        "symfony/translation": "^5.4"
     },
     "autoload": {
         "psr-4": {
             "Softspring\\NotificationBundle\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.0-dev"
         }
     }
 }

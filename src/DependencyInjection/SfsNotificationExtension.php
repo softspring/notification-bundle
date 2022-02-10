@@ -6,7 +6,6 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class SfsNotificationExtension extends Extension
@@ -24,7 +23,7 @@ class SfsNotificationExtension extends Extension
         $container->setParameter('sfs_notification.model.notification.class', $config['notification_class']);
         $container->setParameter('sfs_notification.model.user.class', $config['user_class']);
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
 
         $loader->load('services.yaml');
 

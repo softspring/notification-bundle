@@ -9,6 +9,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class SfsNotificationBundle extends Bundle
 {
+    public function getPath(): string
+    {
+        return \dirname(__DIR__);
+    }
+
     /**
      * @param ContainerBuilder $container
      */
@@ -27,7 +32,7 @@ class SfsNotificationBundle extends Bundle
     private function addRegisterMappingsPass(ContainerBuilder $container)
     {
         $mappings = array(
-            realpath(__DIR__.'/Resources/config/doctrine-mapping') => 'Softspring\NotificationBundle\Model',
+            realpath(__DIR__.'/../config/doctrine-mapping') => 'Softspring\NotificationBundle\Model',
         );
 
         if (class_exists('Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass')) {

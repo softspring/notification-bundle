@@ -2,16 +2,24 @@
 
 namespace Softspring\NotificationBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Softspring\NotificationBundle\Model\NotificationInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class NotificationController extends Controller
+class NotificationController extends AbstractController
 {
+    protected EntityManagerInterface $em;
+
+    public function __construct(EntityManagerInterface $em)
+    {
+        $this->em = $em;
+    }
+
     public function viewAll(Request $request): Response
     {
         $notifications = $this->getRepository()->findBy([
@@ -31,7 +39,7 @@ class NotificationController extends Controller
 
         $notification->markRead();
 
-        $this->getDoctrine()->getManager()->flush();
+        $this->em->flush();
 
         return $this->redirect($request->query->get('continue', '/'));
     }
@@ -42,7 +50,7 @@ class NotificationController extends Controller
 
         $notification->markRead();
 
-        $this->getDoctrine()->getManager()->flush();
+        $this->em->flush();
 
         return new Response('', Response::HTTP_NO_CONTENT);
     }
@@ -53,14 +61,14 @@ class NotificationController extends Controller
 
         $notification->markUnread();
 
-        $this->getDoctrine()->getManager()->flush();
+        $this->em->flush();
 
         return new Response('', Response::HTTP_NO_CONTENT);
     }
 
     public function markAllAsReadAjax(): Response
     {
-        $notifications = $this->getDoctrine()->getRepository($this->getParameter('sfs_notification.model.notification.class'))->findBy([
+        $notifications = $this->em->getRepository($this->getParameter('sfs_notification.model.notification.class'))->findBy([
             'user' => $this->getUser(),
             'read' => false,
         ]);
@@ -71,14 +79,14 @@ class NotificationController extends Controller
             $notification->setRead(true);
         }
 
-        $this->getDoctrine()->getManager()->flush();
+        $this->em->flush();
 
         return new Response('', Response::HTTP_NO_CONTENT);
     }
 
     public function markAllAsNotNewAjax(Request $request): Response
     {
-        $notifications = $this->getDoctrine()->getRepository($this->getParameter('sfs_notification.model.notification.class'))->findBy([
+        $notifications = $this->em->getRepository($this->getParameter('sfs_notification.model.notification.class'))->findBy([
             'user' => $this->getUser(),
             'new' => true,
         ]);
@@ -90,14 +98,14 @@ class NotificationController extends Controller
             $notification->setNew(false);
         }
 
-        $this->getDoctrine()->getManager()->flush();
+        $this->em->flush();
 
         return new Response('', Response::HTTP_NO_CONTENT);
     }
 
     protected function getRepository(): EntityRepository
     {
-        return $this->getDoctrine()->getRepository($this->getParameter('sfs_notification.model.notification.class'));
+        return $this->em->getRepository($this->getParameter('sfs_notification.model.notification.class'));
     }
 
     /**
