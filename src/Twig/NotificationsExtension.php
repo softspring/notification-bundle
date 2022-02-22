@@ -16,34 +16,12 @@ use Twig\TwigFunction;
 
 class NotificationsExtension extends AbstractExtension
 {
-    /**
-     * @var TokenStorageInterface
-     */
-    protected $tokenStorage;
+    protected TokenStorageInterface $tokenStorage;
+    protected EntityManagerInterface $em;
+    protected TranslatorInterface $translator;
+    protected string $notificationClass;
+    protected RouterInterface $router;
 
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $em;
-
-    /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    /**
-     * @var string
-     */
-    protected $notificationClass;
-
-    /**
-     * @var RouterInterface
-     */
-    protected $router;
-
-    /**
-     * NotificationsExtension constructor.
-     */
     public function __construct(TokenStorageInterface $tokenStorage, EntityManagerInterface $em, TranslatorInterface $translator, string $notificationClass, RouterInterface $router)
     {
         $this->tokenStorage = $tokenStorage;
@@ -53,17 +31,14 @@ class NotificationsExtension extends AbstractExtension
         $this->router = $router;
     }
 
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('unreadNotifications', [$this, 'unreadNotifications']),
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('getUserNotifications', [$this, 'getUserNotifications']),

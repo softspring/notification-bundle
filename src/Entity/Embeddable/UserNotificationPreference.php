@@ -10,22 +10,19 @@ use Doctrine\ORM\Mapping as ORM;
 class UserNotificationPreference
 {
     /**
-     * @var bool
      * @ORM\Column(name="screen", type="boolean", nullable=false, options={"default": 0})
      */
-    protected $screen = true;
+    protected bool $screen = true;
 
     /**
-     * @var bool
      * @ORM\Column(name="email", type="boolean", nullable=false, options={"default": 0})
      */
-    protected $email = true;
+    protected bool $email = true;
 
     /**
-     * @var bool
      * @ORM\Column(name="push", type="boolean", nullable=false, options={"default": 0})
      */
-    protected $push = true;
+    protected bool $push = true;
 
     public function isScreen(): bool
     {

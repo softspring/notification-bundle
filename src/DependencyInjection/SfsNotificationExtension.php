@@ -10,9 +10,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class SfsNotificationExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $processor = new Processor();
@@ -33,13 +30,6 @@ class SfsNotificationExtension extends Extension
 
         if (true === $config['notify_user_command']) {
             $loader->load('services/notify_user_command.yaml');
-        }
-
-        if (!empty($config['mailer']['service'])) {
-            $container->setParameter('sfs_notification.mailer.service', $config['mailer']['service']);
-            $container->setParameter('sfs_notification.mailer.from_email', $config['mailer']['from_email']);
-            $container->setParameter('sfs_notification.mailer.from_name', $config['mailer']['from_name']);
-            $loader->load('services/notification_mailer.yaml');
         }
     }
 }

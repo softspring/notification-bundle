@@ -28,9 +28,6 @@ interface NotificationInterface
 
     public function isUnread(): bool;
 
-    /**
-     * @param bool
-     */
     public function setRead(bool $read): void;
 
     public function getReadAt(): ?\DateTime;
@@ -49,13 +46,7 @@ interface NotificationInterface
 
     public function setMessage(array $message): void;
 
-    /**
-     * Set read notification.
-     */
     public function markRead(): void;
 
-    /**
-     * Set unread notification.
-     */
     public function markUnread(): void;
 }

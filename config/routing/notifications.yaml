@@ -1,31 +1,25 @@
 sfs_notification_view_all:
-    defaults:
-        _controller: sfs_notification.notification.controller::viewAll
+    controller: sfs_notification.notification.controller::viewAll
     path: /all
 
 sfs_notification_mark_read_notification:
-    defaults:
-        _controller: sfs_notification.notification.controller::markAsRead
+    controller: sfs_notification.notification.controller::markAsRead
     path: /{notification}/read
 
 sfs_notification_mark_read_notification_ajax:
-    defaults:
-        _controller: sfs_notification.notification.controller::markAsReadAjax
+    controller: sfs_notification.notification.controller::markAsReadAjax
     path: /{notification}/read.ajax
 
 sfs_notification_mark_unread_notification_ajax:
-    defaults:
-        _controller: sfs_notification.notification.controller::markAsUnreadAjax
+    controller: sfs_notification.notification.controller::markAsUnreadAjax
     path: /{notification}/unread.ajax
 
 sfs_notification_mark_read_all_ajax:
-    defaults:
-        _controller: sfs_notification.notification.controller::markAllAsReadAjax
+    controller: sfs_notification.notification.controller::markAllAsReadAjax
     path: /read-all.ajax
 
 
 sfs_notification_mark_not_new_all_ajax:
-    defaults:
-        _controller: sfs_notification.notification.controller::markAllAsNotNewAjax
+    controller: sfs_notification.notification.controller::markAllAsNotNewAjax
     path: /not-new-all.ajax
 

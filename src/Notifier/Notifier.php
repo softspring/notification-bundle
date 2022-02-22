@@ -8,28 +8,16 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class Notifier
 {
-    /**
-     * @var EntityManagerInterface
-     */
-    protected $em;
+    protected EntityManagerInterface $em;
 
-    /**
-     * @var string
-     */
-    protected $notificationClass;
+    protected string $notificationClass;
 
-    /**
-     * Notifier constructor.
-     */
     public function __construct(string $notificationClass, EntityManagerInterface $em)
     {
         $this->notificationClass = $notificationClass;
         $this->em = $em;
     }
 
-    /**
-     * @param int $messageLevel
-     */
     public function createNotification(UserInterface $user, array $message, $messageLevel = NotificationInterface::LEVEL_NOTICE, int $messageCode = NotificationInterface::CODE_UNDEFINED): NotificationInterface
     {
         $notificationClass = $this->notificationClass;
@@ -41,8 +29,6 @@ class Notifier
         $notification->setMessageCode($messageCode);
         $notification->setMessageLevel($messageLevel);
         $notification->setMessage($message);
-        // $notification->setClient();
-        // $notification->setPlant();
 
         return $notification;
     }

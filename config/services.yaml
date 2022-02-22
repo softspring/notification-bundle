@@ -1,4 +1,9 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
     sfs_notification.object_manager:
         class: Doctrine\Common\Persistence\ObjectManager
         arguments: ["sfs_notification.model_manager_name"]

@@ -9,8 +9,8 @@ class Configuration implements ConfigurationInterface
 {
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('sfs_notification');
+        $treeBuilder = new TreeBuilder('sfs_notification');
+        $rootNode = $treeBuilder->getRootNode();
 
         $supportedDrivers = ['orm', 'custom'];
 
@@ -27,13 +27,6 @@ class Configuration implements ConfigurationInterface
                     ->cannotBeOverwritten()
                     ->cannotBeEmpty()
                     ->defaultValue('orm')
-                ->end()
-                ->arrayNode('mailer')
-                    ->children()
-                        ->scalarNode('service')->end()
-                        ->scalarNode('from_name')->end()
-                        ->scalarNode('from_email')->end()
-                    ->end()
                 ->end()
             ->end()
         ;

@@ -32,7 +32,7 @@ EOT
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $userClassName = $this->container->getParameter('sfs_notification.model.user.class');
         $em = $this->container->get('doctrine')->getManager();
@@ -57,5 +57,7 @@ EOT
 
         /* @var UserInterface $user */
         $notifier->notifyUser($user, ['raw' => $message]);
+
+        return 0;
     }
 }

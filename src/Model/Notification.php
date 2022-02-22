@@ -6,50 +6,27 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class Notification implements NotificationInterface
 {
-    /**
-     * @var UserInterface|null
-     */
-    protected $user;
+    protected ?UserInterface $user = null;
+
+    protected ?\DateTime $createdAt = null;
+
+    protected bool $new = true;
+
+    protected bool $read = false;
+
+    protected ?\DateTime $readAt = null;
+
+    protected int $messageCode = self::CODE_UNDEFINED;
+
+    protected int $messageLevel = self::LEVEL_NOTICE;
 
     /**
-     * @var \DateTime|null
-     */
-    protected $createdAt;
-
-    /**
-     * @var bool
-     */
-    protected $new = true;
-
-    /**
-     * @var bool
-     */
-    protected $read = false;
-
-    /**
-     * @var \DateTime|null
-     */
-    protected $readAt;
-
-    /**
-     * @var int|null
-     */
-    protected $messageCode = self::CODE_UNDEFINED;
-
-    /**
-     * @var int|null
-     */
-    protected $messageLevel = self::LEVEL_NOTICE;
-
-    /**
-     * @var array|null
-     *
      * Options:
      *     {"raw":"This is a raw message"}
      *     {"domain":"translations_domain", "id":"test.message"}
      *     {"domain":"translations_domain", "id":"test.message", "data":{"plant": "Plant name"}}
      */
-    protected $message;
+    protected ?array $message = null;
 
     public function getUser(): ?UserInterface
     {
@@ -61,17 +38,11 @@ abstract class Notification implements NotificationInterface
         $this->user = $user;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getCreatedAt(): ?\DateTime
     {
         return $this->createdAt;
     }
 
-    /**
-     * Auto set created at.
-     */
     public function autoSetCreatedAt()
     {
         $this->createdAt = new \DateTime('now');
@@ -87,25 +58,16 @@ abstract class Notification implements NotificationInterface
         $this->new = $new;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isRead(): bool
     {
         return $this->read;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isUnread(): bool
     {
         return !$this->isRead();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setRead(bool $read): void
     {
         $this->read = $read;
@@ -115,17 +77,11 @@ abstract class Notification implements NotificationInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getReadAt(): ?\DateTime
     {
         return $this->readAt;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setReadAt(?\DateTime $readAt): void
     {
         $this->readAt = $readAt;
@@ -135,49 +91,31 @@ abstract class Notification implements NotificationInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMessageCode(): ?int
     {
         return $this->messageCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setMessageCode(int $messageCode): void
     {
         $this->messageCode = $messageCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMessageLevel(): ?int
     {
         return $this->messageLevel;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setMessageLevel(int $messageLevel): void
     {
         $this->messageLevel = $messageLevel;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getMessage(): ?array
     {
         return $this->message;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setMessage(array $message): void
     {
         $this->message = $message;
