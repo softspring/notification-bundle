@@ -24,7 +24,7 @@ abstract class Notification implements NotificationInterface
      * Options:
      *     {"raw":"This is a raw message"}
      *     {"domain":"translations_domain", "id":"test.message"}
-     *     {"domain":"translations_domain", "id":"test.message", "data":{"plant": "Plant name"}}
+     *     {"domain":"translations_domain", "id":"test.message", "data":{"plant": "Plant name"}}.
      */
     protected ?array $message = null;
 
