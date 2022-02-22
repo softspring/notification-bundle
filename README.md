@@ -1,4 +1,10 @@
-# Notification bundle
+# SfsNotificationBundle
+
+[![Latest Stable Version](https://poser.pugx.org/softspring/notification-bundle/v/stable.svg)](https://packagist.org/packages/softspring/notification-bundle)
+[![Latest Unstable Version](https://poser.pugx.org/softspring/notification-bundle/v/unstable.svg)](https://packagist.org/packages/softspring/notification-bundle)
+[![License](https://poser.pugx.org/softspring/notification-bundle/license.svg)](https://packagist.org/packages/softspring/notification-bundle)
+[![Total Downloads](https://poser.pugx.org/softspring/notification-bundle/downloads)](https://packagist.org/packages/softspring/notification-bundle)
+[![Build status](https://travis-ci.com/softspring/notification-bundle.svg?branch=master)](https://app.travis-ci.com/github/softspring/notification-bundle)
 
 ## Installation
 
