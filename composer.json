@@ -7,7 +7,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=7.4",
-        "softspring/user-bundle": "^4.0"
+        "softspring/user-bundle": "^5.0"
     },
     "require-dev": {
         "doctrine/orm": "^2.7",
