@@ -29,7 +29,7 @@ Create your Notification entity:
     namespace App\Entity;
     
     use Doctrine\ORM\Mapping as ORM;
-    use Softspring\DoctrineTemplates\Entity\Traits\AutoId;
+    use Softspring\Component\DoctrineTemplates\Entity\Traits\AutoId;
     use Softspring\NotificationBundle\Model\Notification as SfsNotification;
     
     /**
