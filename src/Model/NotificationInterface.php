@@ -14,6 +14,8 @@ interface NotificationInterface
     public const LEVEL_CRITICAL = 40;
     public const LEVEL_EMERGENCY = 50;
 
+    public function getId();
+
     public function getCreatedAt(): ?\DateTime;
 
     public function getUser(): ?UserInterface;

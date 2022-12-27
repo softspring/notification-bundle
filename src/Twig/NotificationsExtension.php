@@ -53,8 +53,10 @@ class NotificationsExtension extends AbstractExtension
             return new ArrayCollection([]);
         }
 
-        /** @var UserInterface $user */
-        if (!$user = $token->getUser()) {
+        /** @var ?UserInterface $user */
+        $user = $token->getUser();
+
+        if (!$user) {
             return new ArrayCollection([]);
         }
 
@@ -124,6 +126,7 @@ class NotificationsExtension extends AbstractExtension
         $notification->setReadAt(new \DateTime('now'));
         $notification->setRead(true);
 
+        /* @phpstan-ignore-next-line */
         $this->em->flush($notification);
     }
 }

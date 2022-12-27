@@ -37,6 +37,8 @@ class Notifier
     {
         $notification = $this->createNotification($user, $message, $messageLevel, $messageCode);
         $this->em->persist($notification);
+
+        /* @phpstan-ignore-next-line */
         $this->em->flush($notification);
     }
 
