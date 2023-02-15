@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## [4.1.0](https://github.com/softspring/notification-bundle/releases/tag/4.1.0) (07 mar 2022)
+## [v5.0.5](https://github.com/softspring/notification-bundle/releases/tag/v5.0.5)
 
 ### Upgrading
 
@@ -8,12 +8,31 @@
 
 ### Commits
 
-- 8bce4a9 Remove dev version in composer.json file
-- 9234652 Update readme
-- b0582de Configure new 4.1-dev version to main branch in composer.json file
-- c904b6c Remove dev version in composer.json file
+- [ce22427](https://github.com/softspring/notification-bundle/commit/ce224271067e125eb0ec858cd6feb0c642187627): Update changelog
 
 ### Changes
 
- README.md | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+```
+ CHANGELOG.md | 24 +++++++++++++-----------
+ 1 file changed, 13 insertions(+), 11 deletions(-)
+```
+
+## [v5.0.4](https://github.com/softspring/notification-bundle/releases/tag/v5.0.4)
+
+*Nothing has changed since last v5.0.3 version*
+
+## [v5.0.3](https://github.com/softspring/notification-bundle/releases/tag/v5.0.3)
+
+*Nothing has changed since last v5.0.2 version*
+
+## [v5.0.2](https://github.com/softspring/notification-bundle/releases/tag/v5.0.2)
+
+*Nothing has changed since last v5.0.1 version*
+
+## [v5.0.1](https://github.com/softspring/notification-bundle/releases/tag/v5.0.1)
+
+*Nothing has changed since last v5.0.0 version*
+
+## [v5.0.0](https://github.com/softspring/notification-bundle/releases/tag/v5.0.0)
+
+*Previous versions are not in changelog*
