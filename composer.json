@@ -9,7 +9,7 @@
         "php": ">=8.0",
         "doctrine/doctrine-bundle": "^2.5",
         "doctrine/orm": "^2.10",
-        "softspring/user-bundle": "^5.0",
+        "softspring/user-bundle": "^5.1",
         "symfony/console": "^5.4|^6.0",
         "symfony/form": "^5.4|^6.0",
         "symfony/framework-bundle": "^5.4|^6.0",
