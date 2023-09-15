@@ -4,7 +4,7 @@
 [![Latest Unstable Version](https://poser.pugx.org/softspring/notification-bundle/v/unstable.svg)](https://packagist.org/packages/softspring/notification-bundle)
 [![License](https://poser.pugx.org/softspring/notification-bundle/license.svg)](https://packagist.org/packages/softspring/notification-bundle)
 [![Total Downloads](https://poser.pugx.org/softspring/notification-bundle/downloads)](https://packagist.org/packages/softspring/notification-bundle)
-[![Build status](https://github.com/softspring/notification-bundle/actions/workflows/php.yml/badge.svg?branch=5.1)](https://github.com/softspring/notification-bundle/actions/workflows/php.yml)
+[![Build status](https://github.com/softspring/notification-bundle/actions/workflows/php.yml/badge.svg?branch=5.2)](https://github.com/softspring/notification-bundle/actions/workflows/php.yml)
 
 ## Installation
 
