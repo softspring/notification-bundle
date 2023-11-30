@@ -17,8 +17,8 @@
         "symfony/translation": "^5.4|^6.0|^7.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.14",
-        "phpstan/phpstan": "^1.9"
+        "friendsofphp/php-cs-fixer": "^3.40",
+        "phpstan/phpstan": "^1.10"
     },
     "autoload": {
         "psr-4": {
