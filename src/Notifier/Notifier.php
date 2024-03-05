@@ -67,27 +67,27 @@ class Notifier
         $this->notifyUser($user, ['raw' => $messageRaw], NotificationInterface::LEVEL_EMERGENCY, $messageCode);
     }
 
-    public function noticeUser(UserInterface $user, string $messageId, int $messageCode = NotificationInterface::CODE_UNDEFINED, string $translationDomain = 'notification', array $messageData = [], string $locale = null): void
+    public function noticeUser(UserInterface $user, string $messageId, int $messageCode = NotificationInterface::CODE_UNDEFINED, string $translationDomain = 'notification', array $messageData = [], ?string $locale = null): void
     {
         $this->notifyUser($user, ['id' => $messageId, 'domain' => $translationDomain, 'data' => $messageData, 'locale' => $locale], NotificationInterface::LEVEL_NOTICE, $messageCode);
     }
 
-    public function warningUser(UserInterface $user, string $messageId, int $messageCode = NotificationInterface::CODE_UNDEFINED, string $translationDomain = 'notification', array $messageData = [], string $locale = null): void
+    public function warningUser(UserInterface $user, string $messageId, int $messageCode = NotificationInterface::CODE_UNDEFINED, string $translationDomain = 'notification', array $messageData = [], ?string $locale = null): void
     {
         $this->notifyUser($user, ['id' => $messageId, 'domain' => $translationDomain, 'data' => $messageData, 'locale' => $locale], NotificationInterface::LEVEL_WARNING, $messageCode);
     }
 
-    public function errorUser(UserInterface $user, string $messageId, int $messageCode = NotificationInterface::CODE_UNDEFINED, string $translationDomain = 'notification', array $messageData = [], string $locale = null): void
+    public function errorUser(UserInterface $user, string $messageId, int $messageCode = NotificationInterface::CODE_UNDEFINED, string $translationDomain = 'notification', array $messageData = [], ?string $locale = null): void
     {
         $this->notifyUser($user, ['id' => $messageId, 'domain' => $translationDomain, 'data' => $messageData, 'locale' => $locale], NotificationInterface::LEVEL_ERROR, $messageCode);
     }
 
-    public function criticalUser(UserInterface $user, string $messageId, int $messageCode = NotificationInterface::CODE_UNDEFINED, string $translationDomain = 'notification', array $messageData = [], string $locale = null): void
+    public function criticalUser(UserInterface $user, string $messageId, int $messageCode = NotificationInterface::CODE_UNDEFINED, string $translationDomain = 'notification', array $messageData = [], ?string $locale = null): void
     {
         $this->notifyUser($user, ['id' => $messageId, 'domain' => $translationDomain, 'data' => $messageData, 'locale' => $locale], NotificationInterface::LEVEL_CRITICAL, $messageCode);
     }
 
-    public function emergencyUser(UserInterface $user, string $messageId, int $messageCode = NotificationInterface::CODE_UNDEFINED, string $translationDomain = 'notification', array $messageData = [], string $locale = null): void
+    public function emergencyUser(UserInterface $user, string $messageId, int $messageCode = NotificationInterface::CODE_UNDEFINED, string $translationDomain = 'notification', array $messageData = [], ?string $locale = null): void
     {
         $this->notifyUser($user, ['id' => $messageId, 'domain' => $translationDomain, 'data' => $messageData, 'locale' => $locale], NotificationInterface::LEVEL_EMERGENCY, $messageCode);
     }
