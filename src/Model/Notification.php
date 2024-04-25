@@ -2,19 +2,20 @@
 
 namespace Softspring\NotificationBundle\Model;
 
+use DateTime;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 abstract class Notification implements NotificationInterface
 {
     protected ?UserInterface $user = null;
 
-    protected ?\DateTime $createdAt = null;
+    protected ?DateTime $createdAt = null;
 
     protected bool $new = true;
 
     protected bool $read = false;
 
-    protected ?\DateTime $readAt = null;
+    protected ?DateTime $readAt = null;
 
     protected int $messageCode = self::CODE_UNDEFINED;
 
@@ -38,14 +39,14 @@ abstract class Notification implements NotificationInterface
         $this->user = $user;
     }
 
-    public function getCreatedAt(): ?\DateTime
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
 
     public function autoSetCreatedAt()
     {
-        $this->createdAt = new \DateTime('now');
+        $this->createdAt = new DateTime('now');
     }
 
     public function isNew(): bool
@@ -73,16 +74,16 @@ abstract class Notification implements NotificationInterface
         $this->read = $read;
 
         if (!$this->getReadAt()) {
-            $this->setReadAt(new \DateTime('now'));
+            $this->setReadAt(new DateTime('now'));
         }
     }
 
-    public function getReadAt(): ?\DateTime
+    public function getReadAt(): ?DateTime
     {
         return $this->readAt;
     }
 
-    public function setReadAt(?\DateTime $readAt): void
+    public function setReadAt(?DateTime $readAt): void
     {
         $this->readAt = $readAt;
 
@@ -124,7 +125,7 @@ abstract class Notification implements NotificationInterface
     public function markRead(): void
     {
         $this->read = true;
-        $this->readAt = new \DateTime('now');
+        $this->readAt = new DateTime('now');
     }
 
     public function markUnread(): void

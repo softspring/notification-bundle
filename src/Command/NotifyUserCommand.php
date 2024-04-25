@@ -10,7 +10,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 class NotifyUserCommand extends Command implements ContainerAwareInterface
 {

@@ -2,6 +2,7 @@
 
 namespace Softspring\NotificationBundle\Twig;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
@@ -123,7 +124,7 @@ class NotificationsExtension extends AbstractExtension
             return;
         }
 
-        $notification->setReadAt(new \DateTime('now'));
+        $notification->setReadAt(new DateTime('now'));
         $notification->setRead(true);
 
         /* @phpstan-ignore-next-line */

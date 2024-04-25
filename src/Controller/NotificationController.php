@@ -2,6 +2,7 @@
 
 namespace Softspring\NotificationBundle\Controller;
 
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Softspring\NotificationBundle\Model\NotificationInterface;
@@ -75,7 +76,7 @@ class NotificationController extends AbstractController
 
         /** @var NotificationInterface $notification */
         foreach ($notifications as $notification) {
-            $notification->setReadAt(new \DateTime('now'));
+            $notification->setReadAt(new DateTime('now'));
             $notification->setRead(true);
         }
 

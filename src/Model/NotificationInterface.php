@@ -2,6 +2,7 @@
 
 namespace Softspring\NotificationBundle\Model;
 
+use DateTime;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 interface NotificationInterface
@@ -16,7 +17,7 @@ interface NotificationInterface
 
     public function getId();
 
-    public function getCreatedAt(): ?\DateTime;
+    public function getCreatedAt(): ?DateTime;
 
     public function getUser(): ?UserInterface;
 
@@ -32,9 +33,9 @@ interface NotificationInterface
 
     public function setRead(bool $read): void;
 
-    public function getReadAt(): ?\DateTime;
+    public function getReadAt(): ?DateTime;
 
-    public function setReadAt(?\DateTime $readAt): void;
+    public function setReadAt(?DateTime $readAt): void;
 
     public function getMessageCode(): ?int;
 

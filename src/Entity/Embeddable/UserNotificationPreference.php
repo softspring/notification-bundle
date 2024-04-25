@@ -4,24 +4,16 @@ namespace Softspring\NotificationBundle\Entity\Embeddable;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Embeddable
- */
+#[ORM\Embeddable]
 class UserNotificationPreference
 {
-    /**
-     * @ORM\Column(name="screen", type="boolean", nullable=false, options={"default": 0})
-     */
+    #[ORM\Column(name: 'screen', type: 'boolean', nullable: false, options: ['default' => 0])]
     protected bool $screen = true;
 
-    /**
-     * @ORM\Column(name="email", type="boolean", nullable=false, options={"default": 0})
-     */
+    #[ORM\Column(name: 'email', type: 'boolean', nullable: false, options: ['default' => 0])]
     protected bool $email = true;
 
-    /**
-     * @ORM\Column(name="push", type="boolean", nullable=false, options={"default": 0})
-     */
+    #[ORM\Column(name: 'push', type: 'boolean', nullable: false, options: ['default' => 0])]
     protected bool $push = true;
 
     public function isScreen(): bool
