@@ -2,7 +2,7 @@
     "name": "softspring/notification-bundle",
     "description": "User notifications bundle",
     "type": "symfony-bundle",
-    "license": "AGPL-3.0",
+    "license": "AGPL-3.0-or-later",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
