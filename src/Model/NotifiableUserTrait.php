@@ -17,14 +17,14 @@ trait NotifiableUserTrait
 
     public function hasUnreadNotifications(): bool
     {
-        return (bool) $this->getNotifications()->filter(function (NotificationInterface $notification) {
+        return (bool) $this->getNotifications()->filter(function (NotificationInterface $notification): bool {
             return $notification->isUnread();
         })->count();
     }
 
     public function hasNewNotifications(): bool
     {
-        return (bool) $this->getNotifications()->filter(function (NotificationInterface $notification) {
+        return (bool) $this->getNotifications()->filter(function (NotificationInterface $notification): bool {
             return $notification->isNew();
         })->count();
     }
@@ -41,7 +41,7 @@ trait NotifiableUserTrait
         }
 
         if ($onlyUnread) {
-            $notifications = $notifications->filter(function (NotificationInterface $notification) {
+            $notifications = $notifications->filter(function (NotificationInterface $notification): bool {
                 return $notification->isUnread();
             });
         }

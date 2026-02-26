@@ -14,8 +14,9 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 class NotifyUserCommand extends Command implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
+    public $container;
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('sfs:notification:notify')

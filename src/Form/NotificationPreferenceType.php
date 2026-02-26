@@ -10,7 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class NotificationPreferenceType extends AbstractType
 {
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => UserNotificationPreference::class,
@@ -31,7 +31,7 @@ class NotificationPreferenceType extends AbstractType
         $resolver->setAllowedTypes('push_options', ['array']);
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if ($options['screen_allowed']) {
             $builder->add('screen', CheckboxType::class, array_merge([

@@ -18,7 +18,7 @@ class Notifier
         $this->em = $em;
     }
 
-    public function createNotification(UserInterface $user, array $message, $messageLevel = NotificationInterface::LEVEL_NOTICE, int $messageCode = NotificationInterface::CODE_UNDEFINED): NotificationInterface
+    public function createNotification(UserInterface $user, array $message, int $messageLevel = NotificationInterface::LEVEL_NOTICE, int $messageCode = NotificationInterface::CODE_UNDEFINED): NotificationInterface
     {
         $notificationClass = $this->notificationClass;
 
@@ -33,7 +33,7 @@ class Notifier
         return $notification;
     }
 
-    public function notifyUser(UserInterface $user, array $message, $messageLevel = NotificationInterface::LEVEL_NOTICE, int $messageCode = NotificationInterface::CODE_UNDEFINED): void
+    public function notifyUser(UserInterface $user, array $message, int $messageLevel = NotificationInterface::LEVEL_NOTICE, int $messageCode = NotificationInterface::CODE_UNDEFINED): void
     {
         $notification = $this->createNotification($user, $message, $messageLevel, $messageCode);
         $this->em->persist($notification);

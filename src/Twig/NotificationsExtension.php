@@ -10,12 +10,12 @@ use Softspring\NotificationBundle\Model\NotificationInterface;
 use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Twig\Extension\AbstractExtension;
-use Twig\TwigFilter;
-use Twig\TwigFunction;
+use Twig\Attribute\AsTwigFilter;
+use Twig\Attribute\AsTwigFunction;
 
-class NotificationsExtension extends AbstractExtension
+class NotificationsExtension
 {
     protected TokenStorageInterface $tokenStorage;
     protected EntityManagerInterface $em;
@@ -32,25 +32,10 @@ class NotificationsExtension extends AbstractExtension
         $this->router = $router;
     }
 
-    public function getFilters(): array
-    {
-        return [
-            new TwigFilter('unreadNotifications', [$this, 'unreadNotifications']),
-        ];
-    }
-
-    public function getFunctions(): array
-    {
-        return [
-            new TwigFunction('getUserNotifications', [$this, 'getUserNotifications']),
-            new TwigFunction('notificationMessage', [$this, 'notificationMessage'], ['is_safe' => ['html']]),
-            new TwigFunction('notificationMarkAsRead', [$this, 'notificationMarkAsRead']),
-        ];
-    }
-
+    #[AsTwigFunction(name: 'getUserNotifications')]
     public function getUserNotifications(?int $limit = 4, bool $onlyUnread = false): Collection
     {
-        if (!$token = $this->tokenStorage->getToken()) {
+        if (!($token = $this->tokenStorage->getToken()) instanceof TokenInterface) {
             return new ArrayCollection([]);
         }
 
@@ -76,6 +61,7 @@ class NotificationsExtension extends AbstractExtension
         return new ArrayCollection($result);
     }
 
+    #[AsTwigFunction(name: 'notificationMessage', isSafe: ['html'])]
     public function notificationMessage(NotificationInterface $notification): string
     {
         $message = $notification->getMessage();
@@ -99,16 +85,17 @@ class NotificationsExtension extends AbstractExtension
     /**
      * @param array|Collection $collection
      */
+    #[AsTwigFilter(name: 'unreadNotifications')]
     public function unreadNotifications($collection): bool
     {
-        $filterCallback = function (NotificationInterface $notification) {
+        $filterCallback = function (NotificationInterface $notification): bool {
             return !$notification->isRead();
         };
 
         if (is_array($collection)) {
             $unreadNotifications = array_filter($collection, $filterCallback);
 
-            return !empty($unreadNotifications);
+            return [] !== $unreadNotifications;
         } elseif ($collection instanceof Collection) {
             $unreadNotifications = $collection->filter($filterCallback);
 
@@ -118,7 +105,8 @@ class NotificationsExtension extends AbstractExtension
         return false;
     }
 
-    public function notificationMarkAsRead(NotificationInterface $notification)
+    #[AsTwigFunction(name: 'notificationMarkAsRead')]
+    public function notificationMarkAsRead(NotificationInterface $notification): void
     {
         if ($notification->isRead()) {
             return;

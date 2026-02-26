@@ -44,7 +44,7 @@ abstract class Notification implements NotificationInterface
         return $this->createdAt;
     }
 
-    public function autoSetCreatedAt()
+    public function autoSetCreatedAt(): void
     {
         $this->createdAt = new DateTime('now');
     }
@@ -73,7 +73,7 @@ abstract class Notification implements NotificationInterface
     {
         $this->read = $read;
 
-        if (!$this->getReadAt()) {
+        if (!$this->getReadAt() instanceof DateTime) {
             $this->setReadAt(new DateTime('now'));
         }
     }
