@@ -6,68 +6,29 @@
 ![PHP Version](https://img.shields.io/packagist/dependency-v/softspring/notification-bundle/php?style=flat-square)
 ![Downloads](https://img.shields.io/packagist/dt/softspring/notification-bundle?style=flat-square)
 [![CI](https://img.shields.io/github/actions/workflow/status/softspring/notification-bundle/ci.yml?branch=6.0&style=flat-square&label=CI)](https://github.com/softspring/notification-bundle/actions/workflows/ci.yml)
-![Coverage](https://raw.githubusercontent.com/softspring/notification-bundle/6.0/.github/badges/coverage.svg)
 
-## Installation
+User notifications bundle
 
-### Configure Bundle
+## Armonic
 
-If you use flex, you should not need to do this. But if you don't or something goes wrong, you must add include
-the bundle in config/bundles.php file:
+This package is part of [Armonic](https://softspring.es/en/armonic).
 
-    <?php
-    
-    return [
-        ...
-        Softspring\NotificationBundle\SfsNotificationBundle::class => ['all' => true],
-    ];
+## Documentation
 
-### Configure ORM
+[Armonic Documentation](https://armonic.softspring.es/latest/bundles/notification-bundle)
 
-Create your Notification entity:
+## Contributing
 
-    <?php
-    
-    namespace App\Entity;
-    
-    use Doctrine\ORM\Mapping as ORM;
-    use Softspring\Component\DoctrineTemplates\Entity\Traits\AutoId;
-    use Softspring\NotificationBundle\Model\Notification as SfsNotification;
-    
-    /**
-     * @ORM\Entity()
-     * @ORM\Table(name="notification")
-     */
-    class Notification extends SfsNotification
-    {
-        use AutoId;
-        
-        /**
-         * @var User|null
-         * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="notifications")
-         * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
-         */
-        protected $user;
-        
-        /**
-         * @inheritdoc
-         */
-        public function getUser(): ?UserInterface
-        {
-            return $this->user;
-        }
-    
-        /**
-         * @inheritdoc
-         */
-        public function setUser(UserInterface $user): void
-        {
-            $this->user = $user;
-        }
-    }
+Use the standard package commands before sending changes:
 
+```bash
+composer fix
+composer test
+composer test-bc
+```
 
-Create config/packages/sfs_notification.yaml file with your entity configuration
+[Report issues](https://github.com/softspring/notification-bundle/issues) and [send Pull Requests](https://github.com/softspring/notification-bundle/pulls)
 
-    sfs_notification:
-        notification_class: App\Entity\Notification
+## License
+
+This package is free and released under the [AGPL-3.0 license](LICENSE).
