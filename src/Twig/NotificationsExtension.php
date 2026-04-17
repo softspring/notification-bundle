@@ -12,10 +12,11 @@ use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Twig\Attribute\AsTwigFilter;
-use Twig\Attribute\AsTwigFunction;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 
-class NotificationsExtension
+class NotificationsExtension extends AbstractExtension
 {
     protected TokenStorageInterface $tokenStorage;
     protected EntityManagerInterface $em;
@@ -32,7 +33,22 @@ class NotificationsExtension
         $this->router = $router;
     }
 
-    #[AsTwigFunction(name: 'getUserNotifications')]
+    public function getFunctions(): array
+    {
+        return [
+            new TwigFunction('getUserNotifications', [$this, 'getUserNotifications']),
+            new TwigFunction('notificationMessage', [$this, 'notificationMessage'], ['is_safe' => ['html']]),
+            new TwigFunction('notificationMarkAsRead', [$this, 'notificationMarkAsRead']),
+        ];
+    }
+
+    public function getFilters(): array
+    {
+        return [
+            new TwigFilter('unreadNotifications', [$this, 'unreadNotifications']),
+        ];
+    }
+
     public function getUserNotifications(?int $limit = 4, bool $onlyUnread = false): Collection
     {
         if (!($token = $this->tokenStorage->getToken()) instanceof TokenInterface) {
@@ -61,7 +77,6 @@ class NotificationsExtension
         return new ArrayCollection($result);
     }
 
-    #[AsTwigFunction(name: 'notificationMessage', isSafe: ['html'])]
     public function notificationMessage(NotificationInterface $notification): string
     {
         $message = $notification->getMessage();
@@ -85,7 +100,6 @@ class NotificationsExtension
     /**
      * @param array|Collection $collection
      */
-    #[AsTwigFilter(name: 'unreadNotifications')]
     public function unreadNotifications($collection): bool
     {
         $filterCallback = function (NotificationInterface $notification): bool {
@@ -105,7 +119,6 @@ class NotificationsExtension
         return false;
     }
 
-    #[AsTwigFunction(name: 'notificationMarkAsRead')]
     public function notificationMarkAsRead(NotificationInterface $notification): void
     {
         if ($notification->isRead()) {

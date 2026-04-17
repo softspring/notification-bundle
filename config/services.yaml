@@ -24,8 +24,6 @@ services:
             $translator: '@translator'
             $notificationClass: '%sfs_notification.model.notification.class%'
             $router: '@router'
-        tags:
-            - { name: twig.extension }
 
     sfs_notification.notification.controller:
         class: Softspring\NotificationBundle\Controller\NotificationController
