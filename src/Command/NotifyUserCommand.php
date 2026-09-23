@@ -2,19 +2,25 @@
 
 namespace Softspring\NotificationBundle\Command;
 
+use Doctrine\Persistence\ManagerRegistry;
+use Softspring\NotificationBundle\Notifier\Notifier;
+use Softspring\UserBundle\Model\UserInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\InvalidOptionException;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class NotifyUserCommand extends Command implements ContainerAwareInterface
+class NotifyUserCommand extends Command
 {
-    use ContainerAwareTrait;
-    public $container;
+    public function __construct(
+        private readonly ManagerRegistry $doctrine,
+        private readonly Notifier $notifier,
+        private readonly string $userClassName,
+    ) {
+        parent::__construct();
+    }
 
     protected function configure(): void
     {
@@ -34,10 +40,7 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $userClassName = $this->container->getParameter('sfs_notification.model.user.class');
-        $em = $this->container->get('doctrine')->getManager();
-
-        $repo = $em->getRepository($userClassName);
+        $repo = $this->doctrine->getManager()->getRepository($this->userClassName);
 
         if ($email = $input->getOption('email')) {
             $user = $repo->findOneBy(['email' => $email]);
@@ -47,17 +50,14 @@ EOT
             throw new InvalidOptionException('Email or username options is required');
         }
 
-        if (!$user) {
+        $message = $input->getArgument('message');
+
+        if (!$user instanceof UserInterface) {
             throw new InvalidOptionException('User not found');
         }
 
-        $notifier = $this->container->get('sfs_notifier');
+        $this->notifier->notifyUser($user, ['raw' => $message]);
 
-        $message = $input->getArgument('message');
-
-        /* @var UserInterface $user */
-        $notifier->notifyUser($user, ['raw' => $message]);
-
-        return 0;
+        return Command::SUCCESS;
     }
 }

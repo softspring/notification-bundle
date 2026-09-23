@@ -7,9 +7,6 @@ use Doctrine\Common\Collections\Collection;
 
 trait NotifiableUserTrait
 {
-    /**
-     * @return Collection|NotificationInterface[]
-     */
     public function getNotifications(): Collection
     {
         return $this->notifications;
@@ -29,9 +26,6 @@ trait NotifiableUserTrait
         })->count();
     }
 
-    /**
-     * @return Collection|NotificationInterface[]
-     */
     public function getLastNotifications(?int $limit = 4, bool $onlyUnread = true): Collection
     {
         $notifications = $this->getNotifications();
@@ -41,7 +35,7 @@ trait NotifiableUserTrait
         }
 
         if ($onlyUnread) {
-            $notifications = $notifications->filter(function (NotificationInterface $notification): bool {
+            return $notifications->filter(function (NotificationInterface $notification): bool {
                 return $notification->isUnread();
             });
         }

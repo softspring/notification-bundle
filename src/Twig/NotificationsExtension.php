@@ -36,16 +36,16 @@ class NotificationsExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('getUserNotifications', [$this, 'getUserNotifications']),
-            new TwigFunction('notificationMessage', [$this, 'notificationMessage'], ['is_safe' => ['html']]),
-            new TwigFunction('notificationMarkAsRead', [$this, 'notificationMarkAsRead']),
+            new TwigFunction('getUserNotifications', $this->getUserNotifications(...)),
+            new TwigFunction('notificationMessage', $this->notificationMessage(...), ['is_safe' => ['html']]),
+            new TwigFunction('notificationMarkAsRead', $this->notificationMarkAsRead(...)),
         ];
     }
 
     public function getFilters(): array
     {
         return [
-            new TwigFilter('unreadNotifications', [$this, 'unreadNotifications']),
+            new TwigFilter('unreadNotifications', $this->unreadNotifications(...)),
         ];
     }
 
@@ -110,13 +110,11 @@ class NotificationsExtension extends AbstractExtension
             $unreadNotifications = array_filter($collection, $filterCallback);
 
             return [] !== $unreadNotifications;
-        } elseif ($collection instanceof Collection) {
-            $unreadNotifications = $collection->filter($filterCallback);
-
-            return (bool) $unreadNotifications->count();
         }
 
-        return false;
+        $unreadNotifications = $collection->filter($filterCallback);
+
+        return (bool) $unreadNotifications->count();
     }
 
     public function notificationMarkAsRead(NotificationInterface $notification): void

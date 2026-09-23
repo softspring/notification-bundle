@@ -1,5 +1,7 @@
 services:
     sfs_notification.command.nofity:
         class: Softspring\NotificationBundle\Command\NotifyUserCommand
+        arguments:
+            $userClassName: '%sfs_notification.model.user.class%'
         tags:
             - { name: console.command, command: sfs:notification:notify }
