@@ -5,7 +5,7 @@
 ![License](https://img.shields.io/packagist/l/softspring/notification-bundle?style=flat-square)
 ![PHP Version](https://img.shields.io/packagist/dependency-v/softspring/notification-bundle/php?style=flat-square)
 ![Downloads](https://img.shields.io/packagist/dt/softspring/notification-bundle?style=flat-square)
-[![CI](https://img.shields.io/github/actions/workflow/status/softspring/notification-bundle/ci.yml?branch=6.0&style=flat-square&label=CI)](https://github.com/softspring/notification-bundle/actions/workflows/ci.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/softspring/notification-bundle/ci.yml?branch=6.1&style=flat-square&label=CI)](https://github.com/softspring/notification-bundle/actions/workflows/ci.yml)
 
 User notifications bundle
 
