@@ -15,7 +15,7 @@ This package is part of [Armonic](https://softspring.es/en/armonic).
 
 ## Documentation
 
-[Armonic Documentation](https://armonic.softspring.es/6.0/bundles/notification-bundle)
+Armonic usage documentation is deferred while this package is reviewed for an update and continued use.
 
 ## Contributing
 
